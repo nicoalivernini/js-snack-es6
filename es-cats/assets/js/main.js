@@ -15,7 +15,7 @@
 // Milestone 3
 // Creare un nuovo array con prima tutti i gattini
 // femmina e poi tutti i gattini maschio, inserendo
-// solamente nome e colore e colore e opacità del
+// solamente nome colore e opacità del
 // fiocco per ogni gatto.
 
 //Milestone 1
@@ -24,25 +24,25 @@
 const gatti = [
   {
     nome : 'Maine',
-    eta : '3',
+    eta : 2,
     colore : 'Nero',
     sesso : 'Maschio',
   },
   {
     nome : 'Persiana',
-    eta : '6',
+    eta : 6,
     colore : 'Marrone',
     sesso : 'Femmina',
   },
   {
     nome : 'Certosino',
-    eta : '4',
+    eta : 3,
     colore : 'Grigio',
     sesso : 'Maschio',
   },
   {
     nome : 'Norva',
-    eta : '8',
+    eta : 8,
     colore : 'Bianco',
     sesso : 'Femmina',
   },
@@ -70,13 +70,16 @@ console.log(gattiFemmine);
 // o di blu, se maschio.
 
 gatti.forEach((item) => {
-  if (item.sesso == 'Maschio') {
+  if (item.sesso == "Maschio") {
     //aggiungo un fiocco blu
-    $('#lista-gatti').append(`<li>${item.nome} <i class="fas fa-ribbon"></i></li>`);
-    $('#lista-gatti i').css('color' , 'blue');
-  } else if (item.sesso == 'Femmina') {
+    console.log(item);
+    $('#lista-gatti').append(`<li>${item.nome} <i class="fas fa-ribbon maschio"></i></li>`);
+    $('.maschio').css('color' , 'blue');
+  } else if (item.sesso == "Femmina") {
+    console.log(item);
     //aggiungo un giocco rosa
-    $('#lista-gatti').append(`<li>${item.nome} <i class="fas fa-ribbon"></i></li>`);
+    $('#lista-gatti').append(`<li>${item.nome} <i class="fas fa-ribbon femmina"></i></li>`);
+    $('.femmina').css('color' , 'pink');
   }
 });
 
@@ -84,3 +87,15 @@ gatti.forEach((item) => {
 // Il colore del fiocco deve
 // essere più tenue se il gatto è più giovane, più
 // scuro se il gatto è più vecchio.
+
+gatti.forEach((item) => {
+  if (item.eta >= 4) {
+    $('#lista-gatti li i').css('opacity' , '0.5');
+    console.log('>=4');
+  } else if (item.eta <= 3) {
+    $('#lista-gatti li i').css('opacity' , '1');
+    console.log('<=3');
+  }
+
+
+});
