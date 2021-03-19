@@ -19,7 +19,6 @@
 // fiocco per ogni gatto.
 
 //Milestone 1
-
 //Definisco array di oggetti
 
 const gatti = [
@@ -55,3 +54,33 @@ const gatti = [
 gatti.forEach((item) => {
   console.log(`Il gatto si chiama ${item.nome} ed è di colore ${item.colore}`);
 });
+
+//Milestone 2
+// Dividere i gatti in due contenitori distinti
+// in base al sesso e
+
+const gattiMaschi = gatti.filter((element) => element.sesso == "Maschio");
+console.log(gattiMaschi);
+const gattiFemmine = gatti.filter((element) => element.sesso == "Femmina");
+console.log(gattiFemmine);
+
+
+// aggiungere a fianco di ogni
+// gattino un fiocco colorato di rosa, se femmina,
+// o di blu, se maschio.
+
+gatti.forEach((item) => {
+  if (item.sesso == 'Maschio') {
+    //aggiungo un fiocco blu
+    $('#lista-gatti').append(`<li>${item.nome} <i class="fas fa-ribbon"></i></li>`);
+    $('#lista-gatti i').css('color' , 'blue');
+  } else if (item.sesso == 'Femmina') {
+    //aggiungo un giocco rosa
+    $('#lista-gatti').append(`<li>${item.nome} <i class="fas fa-ribbon"></i></li>`);
+  }
+});
+
+
+// Il colore del fiocco deve
+// essere più tenue se il gatto è più giovane, più
+// scuro se il gatto è più vecchio.
