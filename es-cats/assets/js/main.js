@@ -1,36 +1,15 @@
 // Milestone 1
-// Definire un array di oggetti;
-// ogni oggetto rappresenta un gatto,
-// che è caratterizzato da: nome, età, colore e sesso.
-// Tramite la funzione .forEach(),
-// stampare in pagina tutti i gattini,
-// ciascuno con il proprio colore e il proprio nome.
-// Milestone 2
-// Dividere i gatti in due contenitori distinti
-// in base al sesso e aggiungere a fianco di ogni
-// gattino un fiocco colorato di rosa, se femmina,
-// o di blu, se maschio. Il colore del fiocco deve
-// essere più tenue se il gatto è più giovane, più
-// scuro se il gatto è più vecchio.
-// Milestone 3
-// Creare un nuovo array con prima tutti i gattini
-// femmina e poi tutti i gattini maschio, inserendo
-// solamente nome colore e opacità del
-// fiocco per ogni gatto.
-
-//Milestone 1
-//Definisco array di oggetti
-
+// Definisco array di oggetti
 const gatti = [
   {
     nome : 'Maine',
-    eta : 2,
+    eta : 6,
     colore : 'Nero',
     sesso : 'Maschio',
   },
   {
     nome : 'Persiana',
-    eta : 6,
+    eta : 7,
     colore : 'Marrone',
     sesso : 'Femmina',
   },
@@ -42,60 +21,92 @@ const gatti = [
   },
   {
     nome : 'Norva',
-    eta : 8,
+    eta : 2,
     colore : 'Bianco',
     sesso : 'Femmina',
   },
 ];
 
-// Tramite la funzione .forEach(), stampare in pagina tutti i gattini,
-// ciascuno con il proprio colore e il proprio nome.
-
+//Stampo nella pagina i gattini con colore e nome
 gatti.forEach((item) => {
-  console.log(`Il gatto si chiama ${item.nome} ed è di colore ${item.colore}`);
+  $('#lista-gatti').append(`<li>Il gatto si chiama ${item.nome} ed è di colore ${item.colore}</li>`);
 });
 
-//Milestone 2
-// Dividere i gatti in due contenitori distinti
-// in base al sesso e
 
+// Milestone 2
+// Divido gatti in base al sesso
 const gattiMaschi = gatti.filter((element) => element.sesso == "Maschio");
 console.log(gattiMaschi);
+
 const gattiFemmine = gatti.filter((element) => element.sesso == "Femmina");
 console.log(gattiFemmine);
 
-
-// aggiungere a fianco di ogni
-// gattino un fiocco colorato di rosa, se femmina,
-// o di blu, se maschio.
-
+// Aggiungo fiocco rosa se femmina o blu se maschio
 gatti.forEach((item) => {
   if (item.sesso == "Maschio") {
     //aggiungo un fiocco blu
-    console.log(item);
-    $('#lista-gatti').append(`<li>${item.nome} <i class="fas fa-ribbon maschio"></i></li>`);
+    $('#lista-gatti').append(`<li>${item.nome} <i class="fas fa-ribbon maschio ${item.nome}"></i></li>`);
     $('.maschio').css('color' , 'blue');
   } else if (item.sesso == "Femmina") {
-    console.log(item);
     //aggiungo un giocco rosa
-    $('#lista-gatti').append(`<li>${item.nome} <i class="fas fa-ribbon femmina"></i></li>`);
+    $('#lista-gatti').append(`<li>${item.nome} <i class="fas fa-ribbon femmina ${item.nome}"></i></li>`);
     $('.femmina').css('color' , 'pink');
   }
 });
 
-
-// Il colore del fiocco deve
-// essere più tenue se il gatto è più giovane, più
-// scuro se il gatto è più vecchio.
-
+// Colore del fiocco tenue se gatto giovane sennò più scuro
 gatti.forEach((item) => {
   if (item.eta >= 4) {
-    $('#lista-gatti li i').css('opacity' , '0.5');
-    console.log('>=4');
+    $('.' + item.nome).css('opacity' , '1');
   } else if (item.eta <= 3) {
-    $('#lista-gatti li i').css('opacity' , '1');
-    console.log('<=3');
+    $('.' + item.nome).css('opacity' , '0.5');
   }
-
-
 });
+
+
+// Milestone 3
+// Creare due array nuovi, maschi e femmine
+const maschiOpacity = [];
+  //Inserisco come valore l'opacity nell'oggetto
+  gattiMaschi.forEach((item) => {
+    let opacity;
+    if (item.eta >= 4) {
+      opacity = 1;
+    } else if (item.eta <= 3) {
+      opacity = 0.5;
+    }
+    var gattiMaschiOpacity = {
+      ...item,
+      opacity: opacity,
+    }
+    maschiOpacity.push(gattiMaschiOpacity);
+});
+
+const femmineOpacity = [];
+// Inserisco come valore l'opacity nell'oggetto
+  gattiFemmine.forEach((item) => {
+    let opacity;
+    if (item.eta >= 4) {
+      opacity = 1;
+    } else if (item.eta <= 3) {
+      opacity = 0.5;
+    }
+    var gattiFemmineOpacity = {
+      ...item,
+      opacity: opacity,
+    }
+    femmineOpacity.push(gattiFemmineOpacity);
+});
+
+
+// Ordino i gatti e stampo in console
+const ordineGatti = [...femmineOpacity,...maschiOpacity];
+
+// Destrutturizzo
+const newOrdine = ordineGatti.map((element) => {
+  const {nome, colore, opacity} = element;
+  return {nome, colore, opacity};
+});
+
+// Stampo in console
+console.log(newOrdine);
