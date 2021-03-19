@@ -19,3 +19,39 @@
 // fiocco per ogni gatto.
 
 //Milestone 1
+
+//Definisco array di oggetti
+
+const gatti = [
+  {
+    nome : 'Maine',
+    eta : '3',
+    colore : 'Nero',
+    sesso : 'Maschio',
+  },
+  {
+    nome : 'Persiana',
+    eta : '6',
+    colore : 'Marrone',
+    sesso : 'Femmina',
+  },
+  {
+    nome : 'Certosino',
+    eta : '4',
+    colore : 'Grigio',
+    sesso : 'Maschio',
+  },
+  {
+    nome : 'Norva',
+    eta : '8',
+    colore : 'Bianco',
+    sesso : 'Femmina',
+  },
+];
+
+// Tramite la funzione .forEach(), stampare in pagina tutti i gattini,
+// ciascuno con il proprio colore e il proprio nome.
+
+gatti.forEach((item) => {
+  console.log(`Il gatto si chiama ${item.nome} ed è di colore ${item.colore}`);
+});
